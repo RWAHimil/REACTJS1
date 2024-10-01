@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+// let items = [{ name: "Raj", password: 213456789 }];
 export default function Crud() {
   const [items, setItems] = useState(() => {
     const storedData = localStorage.getItem("itemData");
@@ -11,6 +11,7 @@ export default function Crud() {
     gender: ""
   });
   const [edit, setEdit] = useState(null);
+
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
@@ -39,6 +40,9 @@ export default function Crud() {
         password: "",
         gender: ""
       });
+
+      console.log("CheckBox Value " + isChecked);
+
       setEdit(null);
     }
   };

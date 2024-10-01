@@ -1,7 +1,7 @@
 // actions.js
-export const addTodo = (text) => ({
+export const addTodo = (text, date) => ({
   type: "ADD_TODO",
-  payload: text
+  payload: { text, date }
 });
 
 export const toggleTodo = (id) => ({

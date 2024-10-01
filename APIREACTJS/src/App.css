@@ -4,6 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
+
+* {
+  list-style: none;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -38,4 +43,30 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.post {
+  border: 1px solid black;
+  margin: 20px 0px;
+}
+
+.title {
+  color: firebrick;
+}
+
+.body {
+  color: lightcoral;
+}
+.test {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.IMG {
+  width: 100px;
+  height: 100px;
+  border: 1px solid rgb(109, 13, 13);
+  border-radius: 15px;
+  overflow: hidden;
 }

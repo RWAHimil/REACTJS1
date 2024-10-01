@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Crud />
-      <Crud1 />
+      {/* <Crud1 /> */}
     </>
   );
 }

@@ -1,7 +1,7 @@
-// TodoList.js
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addTodo, toggleTodo, deleteTodo, editTodo } from "./actions";
+// eslint-disable-next-line no-unused-vars
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos);
@@ -11,8 +11,10 @@ const TodoList = () => {
   const [editText, setEditText] = useState("");
 
   const handleAddTodo = () => {
-    dispatch(addTodo(todoText));
-    setTodoText("");
+    if (todoText.trim() !== "") {
+      dispatch(addTodo(todoText));
+      setTodoText("");
+    }
   };
 
   const handleToggleTodo = (id) => {
@@ -40,11 +42,15 @@ const TodoList = () => {
         type="text"
         value={todoText}
         onChange={(e) => setTodoText(e.target.value)}
+        placeholder="Enter TO DO "
       />
+      <br />
+      <br />
       <button onClick={handleAddTodo}>Add Todo</button>
-      <ul>
-        {todos.map((todo) => (
+      <ul className="list1.list">
+        {todos.map((todo, index) => (
           <li key={todo.id}>
+            <span>{index + 1} . </span>
             {editId === todo.id ? (
               <>
                 <input
@@ -64,6 +70,7 @@ const TodoList = () => {
                 >
                   {todo.text}
                 </span>
+                <br />
                 <button onClick={() => handleEditTodo(todo.id, todo.text)}>
                   Edit
                 </button>

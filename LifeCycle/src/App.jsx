@@ -1,8 +1,8 @@
 import { Component } from "react";
 import "./App.css";
 import Student from "./component/Student";
-import Demo from "./Demo";
-import ClassDemo from "./ClassDemo";
+// import Demo from "./Demo";
+// import ClassDemo from "./ClassDemo";
 // import Counter from "./component/Counter";
 // import Counter1 from "./component/Counter1";
 // import LifecycleDemo from "./component/LifecycleDemo";
@@ -16,7 +16,7 @@ export default class App extends Component {
     this.state = {
       // Counter: 0
       show: true,
-      message: "Hello"
+      message: "Hello",
     };
   }
 
@@ -36,7 +36,7 @@ export default class App extends Component {
   // }
   render() {
     console.log("Render Calling");
-    const name = "XYZZZ";
+    // const name = "XYZZ vZ";
     return (
       <div>
         {/* <h1>Class Component Counter</h1>
@@ -67,10 +67,10 @@ export default class App extends Component {
         <hr />
         <hr />
 
-        <Demo name={name} age="25" />
+        {/* <Demo name={name} age="25" /> */}
         <hr />
         <hr />
-        <ClassDemo name={name} age="65" />
+        {/* <ClassDemo name={name} age="65" /> */}
       </div>
     );
   }

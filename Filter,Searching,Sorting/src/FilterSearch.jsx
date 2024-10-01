@@ -16,7 +16,7 @@ export default function FilterSearch() {
 
   useEffect(() => {
     localStorage.setItem("Data", JSON.stringify(list));
-  });
+  },[]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

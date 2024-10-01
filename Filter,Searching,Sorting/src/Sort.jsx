@@ -13,10 +13,9 @@ export default function FilterSearch() {
   const [searchTerm, setSearchTerm] = useState("");
   const [edit, setEdit] = useState(null);
   const [sortBy, setSortBy] = useState(null);
-
   useEffect(() => {
     localStorage.setItem("Data", JSON.stringify(list));
-  });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,12 +56,12 @@ export default function FilterSearch() {
     ? [...list].sort((a, b) => a[sortBy].localeCompare(b[sortBy]))
     : list;
 
-  // Filter
-  const filteredList = sortedList.filter(
+// Filter
+const filteredList = Array.isArray(sortedList) ? sortedList.filter(
     (item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.password.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  ) : [];
 
   return (
     <>

@@ -12,23 +12,35 @@ export default function Sorting() {
   const [edit, setEdit] = useState(null);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
     localStorage.setItem("sortData", JSON.stringify(list));
-  });
+  }, [list]);
 
   const handleFormSubmit = () => {
-    setList([...list, inputValue]);
-    setInputValue({
-      name: "",
-      password: ""
-    });
-    setEdit(null);
+    if (inputValue.name === "") {
+      alert("Please enter a name");
+    } else if (inputValue.name.length < 2) {
+      alert("Please Enter More Than 2 Characters");
+    } else if (inputValue.password === "") {
+      alert("Please Enter a Password");
+    } else if (inputValue.password < 8) {
+      alert("Please Enter More Than 8 Characters");
+    } else {
+      setList([...list, inputValue]);
+      setInputValue({ name: "", password: "" });
+      setEdit(null);
+    }
   };
 
   const handleEdit = (index) => {
-    setEdit(index);
-    setInputValue(list[index]);
+    const originalIndex = sortedList.indexOf(filterList[index]);
+    setEdit(originalIndex);
+    setInputValue({
+      name: filterList[index].name,
+      password: filterList[index].password
+    });
   };
 
   const handleSave = () => {
@@ -49,12 +61,11 @@ export default function Sorting() {
     setSearch(e.target.value);
   };
 
-  const handleSort = (field) => {
-    setSort(field);
-  };
-
   const sortedList = sort
-    ? [...list].sort((a, b) => a[sort].localeCompare(b[sort]))
+    ? [...list].sort((a, b) => {
+        const comparison = a[sort].localeCompare(b[sort]);
+        return sortDirection === "asc" ? comparison : -comparison;
+      })
     : list;
 
   const filterList = sortedList.filter(
@@ -62,6 +73,15 @@ export default function Sorting() {
       item.name.toLowerCase().includes(search.toLowerCase()) ||
       item.password.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleSort = (field) => {
+    if (field === sort) {
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      setSort(field);
+      setSortDirection("asc");
+    }
+  };
   return (
     <>
       <input
@@ -125,29 +145,27 @@ export default function Sorting() {
           </tr>
           {filterList.map((item, index) => {
             return (
-              <>
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{item.name}</td>
-                  <td>{item.password}</td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        handleEdit(index);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => {
-                        handleDelete(index);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              </>
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{item.name}</td>
+                <td>{item.password}</td>
+                <td>
+                  <button
+                    onClick={() => {
+                      handleEdit(index);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleDelete(index);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
             );
           })}
         </table>
